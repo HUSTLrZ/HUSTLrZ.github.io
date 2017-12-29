@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="opencv、java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于opencv使用java API的模板匹配。">
+<meta name="keywords" content="opencv、java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Opencv3 in java 学习笔记(七)：模板匹配">
+<meta property="og:url" content="http://liruozhang.com/20171225/opencv3_in_java_7/index.html">
+<meta property="og:site_name" content="HUSTLrZ&#39;s blog">
+<meta property="og:description" content="关于opencv使用java API的模板匹配。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Template_Matching_Template_Theory_Summary.jpg">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Template_Matching_Template_Theory_Sliding.jpg">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Template_Matching_Template_Theory_Result.jpg">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template1.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template2.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template3.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template4.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template5.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template6.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template7.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/test.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/template.jpg">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/templateMatch.jpg">
+<meta property="og:updated_time" content="2017-12-25T07:02:00.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Opencv3 in java 学习笔记(七)：模板匹配">
+<meta name="twitter:description" content="关于opencv使用java API的模板匹配。">
+<meta name="twitter:image" content="http://liruozhang.com/img/opencv/Template_Matching_Template_Theory_Summary.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liruozhang.com/20171225/opencv3_in_java_7/"/>
+
+
+
+
+
+  <title>Opencv3 in java 学习笔记(七)：模板匹配 | HUSTLrZ's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HUSTLrZ's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">help yourself.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://liruozhang.com/20171225/opencv3_in_java_7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liruozhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUSTLrZ's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Opencv3 in java 学习笔记(七)：模板匹配</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T14:16:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-25T15:02:00+08:00">
+                2017-12-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/opencv/" itemprop="url" rel="index">
+                    <span itemprop="name">opencv</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于opencv使用java API的模板匹配。</p>
+<a id="more"></a>
+<hr>
+<h2 id="什么是模板匹配？"><a href="#什么是模板匹配？" class="headerlink" title="什么是模板匹配？"></a>什么是模板匹配？</h2><p>模板匹配是一项在一幅图像中寻找与另一幅模板图像最匹配(相似)部分的技术.</p>
+<hr>
+<h2 id="它是怎么实现的？"><a href="#它是怎么实现的？" class="headerlink" title="它是怎么实现的？"></a>它是怎么实现的？</h2><ul>
+<li><p>我们需要2幅图像:<br>a.原图像 (I): 在这幅图像里,我们希望找到一块和模板匹配的区域<br>b.模板 (T): 将和原图像比照的图像块<br>我们的目标是检测最匹配的区域:<br><img src="/img/opencv/Template_Matching_Template_Theory_Summary.jpg" alt="src"></p>
+</li>
+<li><p>为了确定匹配区域, 我们不得不滑动模板图像和原图像进行 比较 :<br><img src="/img/opencv/Template_Matching_Template_Theory_Sliding.jpg" alt="src"></p>
+</li>
+<li><p>通过 滑动, 我们的意思是图像块一次移动一个像素 (从左往右,从上往下). 在每一个位置, 都进行一次度量计算来表明它是 “好” 或 “坏” 地与那个位置匹配 (或者说块图像和原图像的特定区域有多么相似).</p>
+</li>
+<li><p>对于 T 覆盖在 I 上的每个位置,你把度量值 保存 到 结果图像矩阵 (R) 中. 在 R 中的每个位置 (x,y) 都包含匹配度量值:<br><img src="/img/opencv/Template_Matching_Template_Theory_Result.jpg" alt="src"><br>上图就是 TM_CCORR_NORMED 方法处理后的结果图像 R . 最白的位置代表最高的匹配. 正如您所见, 红色椭圆框住的位置很可能是结果图像矩阵中的最大数值, 所以这个区域 (以这个点为顶点,长宽和模板图像一样大小的矩阵) 被认为是匹配的.</p>
+</li>
+<li><p>实际上, 我们使用函数 minMaxLoc 来定位在矩阵 R 中的最大值点 (或者最小值, 根据函数输入的匹配参数) .</p>
+</li>
+</ul>
+<hr>
+<h2 id="OpenCV中支持哪些匹配算法？"><a href="#OpenCV中支持哪些匹配算法？" class="headerlink" title="OpenCV中支持哪些匹配算法？"></a>OpenCV中支持哪些匹配算法？</h2><p>OpenCV通过函数 matchTemplate 实现了模板匹配算法. 可用的方法有6个:<br><strong>a.平方差匹配 method=CV_TM_SQDIFF</strong><br>这类方法利用平方差来进行匹配,最好匹配为0.匹配越差,匹配值越大.<br><img src="/img/opencv/template1.png" alt="src"></p>
+<p><strong>b.标准平方差匹配 method=CV_TM_SQDIFF_NORMED</strong><br><img src="/img/opencv/template2.png" alt="src"></p>
+<p><strong>c.相关匹配 method=CV_TM_CCORR</strong><br>这类方法采用模板和图像间的乘法操作,所以较大的数表示匹配程度较高,0标识最坏的匹配效果.<br><img src="/img/opencv/template3.png" alt="src"></p>
+<p><strong>d.标准相关匹配 method=CV_TM_CCORR_NORMED</strong><br><img src="/img/opencv/template4.png" alt="src"></p>
+<p><strong>e.相关匹配 method=CV_TM_CCOEFF</strong><br>这类方法将模版对其均值的相对值与图像对其均值的相关值进行匹配,1表示完美匹配,-1表示糟糕的匹配,0表示没有任何相关性(随机序列).<br><img src="/img/opencv/template5.png" alt="src"><br>在这里<br><img src="/img/opencv/template6.png" alt="src"></p>
+<p><strong>f.标准相关匹配 method=CV_TM_CCOEFF_NORMED</strong><br><img src="/img/opencv/template7.png" alt="src"></p>
+<p>通常,随着从简单的测量(平方差)到更复杂的测量(相关系数),我们可获得越来越准确的匹配(同时也意味着越来越大的计算代价). 最好的办法是对所有这些设置多做一些测试实验,以便为自己的应用选择同时兼顾速度和精度的最佳方案.</p>
+<hr>
+<p>下面以标准平方差CV_TM_SQDIFF_NORMED为例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.opencv.core.Core;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Mat;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Point;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Scalar;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgcodecs.Imgcodecs;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgproc.Imgproc;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> HustLrz</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> Created in 14:46 2017/12/25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//加载opencv动态链接库</span></span><br><span class="line">        String path = <span class="string">"G:/opencv/build/java/x64/opencv_java320.dll"</span>;</span><br><span class="line">        System.load(path);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//read picture</span></span><br><span class="line">        Mat src = Imgcodecs.imread(<span class="string">"res/img/tutorial/test.png"</span>);</span><br><span class="line">        Mat template = Imgcodecs.imread(<span class="string">"res/img/tutorial/template.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        Mat result = <span class="keyword">new</span> Mat();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//进行匹配和标准化</span></span><br><span class="line">        Imgproc.matchTemplate(src, template, result, Imgproc.TM_SQDIFF_NORMED);</span><br><span class="line">        Core.normalize(result, result, <span class="number">0</span>, <span class="number">1</span>, Core.NORM_MINMAX, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过函数 minMaxLoc 定位最匹配的位置</span></span><br><span class="line">        Core.MinMaxLocResult mlr = Core.minMaxLoc(result);</span><br><span class="line">        Point matchLoc = mlr.minLoc;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//绘制矩形</span></span><br><span class="line">        Imgproc.rectangle(src,matchLoc,<span class="keyword">new</span> Point(matchLoc.x+template.cols(),matchLoc.y+template.rows()),<span class="keyword">new</span> Scalar(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2</span>,<span class="number">8</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        Imgcodecs.imwrite(<span class="string">"res/img/tutorial/templateMatch.jpg"</span>,src);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原图：<br><img src="/img/opencv/test.png" alt="src"></p>
+<p>模板：<br><img src="/img/opencv/template.jpg" alt="src"></p>
+<p>匹配结果：<br><img src="/img/opencv/templateMatch.jpg" alt="src"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/opencv、java/" rel="tag"># opencv、java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20171225/opencv3_in_java_6/" rel="next" title="Opencv3 in java 学习笔记(六)：直方图均衡化">
+                <i class="fa fa-chevron-left"></i> Opencv3 in java 学习笔记(六)：直方图均衡化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20171227/opencv3_in_java_8/" rel="prev" title="Opencv3 in java 学习笔记(八)：简单聊聊Mat">
+                Opencv3 in java 学习笔记(八)：简单聊聊Mat <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/avatar.jpg"
+                alt="liruozhang" />
+            
+              <p class="site-author-name" itemprop="name">liruozhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hustlrz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liruozhang</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 你是第<b>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      </b>个到访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

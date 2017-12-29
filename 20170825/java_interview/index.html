@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java、面试题," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文主要介绍一些常见的java面试题，也包括部分计算机网络和常用框架内容，没有进行深入讲解，目的只在于帮助读者梳理复习内容，还请读者对照小标题去进行深入学习。">
+<meta name="keywords" content="java、面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA常见面试题汇总">
+<meta property="og:url" content="http://liruozhang.com/20170825/java_interview/index.html">
+<meta property="og:site_name" content="HUSTLrZ&#39;s blog">
+<meta property="og:description" content="本文主要介绍一些常见的java面试题，也包括部分计算机网络和常用框架内容，没有进行深入讲解，目的只在于帮助读者梳理复习内容，还请读者对照小标题去进行深入学习。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2616609-fbd1a3867266edba.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-21T05:38:00.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA常见面试题汇总">
+<meta name="twitter:description" content="本文主要介绍一些常见的java面试题，也包括部分计算机网络和常用框架内容，没有进行深入讲解，目的只在于帮助读者梳理复习内容，还请读者对照小标题去进行深入学习。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2616609-fbd1a3867266edba.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liruozhang.com/20170825/java_interview/"/>
+
+
+
+
+
+  <title>JAVA常见面试题汇总 | HUSTLrZ's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HUSTLrZ's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">help yourself.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://liruozhang.com/20170825/java_interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liruozhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUSTLrZ's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JAVA常见面试题汇总</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T17:00:09+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T13:38:00+08:00">
+                2017-12-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要介绍一些常见的java面试题，也包括部分计算机网络和常用框架内容，没有进行深入讲解，目的只在于帮助读者梳理复习内容，还请读者对照小标题去进行深入学习。</p>
+<a id="more"></a>
+<hr>
+<h2 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h2><ul>
+<li>面向过程：性能比面向对象高，不需要类的实例化过程，但是缺少面向对象的易维护，易复用，易扩展特性；</li>
+<li>面向对象：性能较之面向过程要低，因为对象的创建和销毁都有开销，优点是易维护，易复用和易扩展。</li>
+</ul>
+<h2 id="JAVA的四个基本特性（抽象，继承，封装，多态）"><a href="#JAVA的四个基本特性（抽象，继承，封装，多态）" class="headerlink" title="JAVA的四个基本特性（抽象，继承，封装，多态）"></a>JAVA的四个基本特性（抽象，继承，封装，多态）</h2><ul>
+<li>抽象：把现实中的某一类东西提取出来，用程序代码表示，我们通常叫做类或者借口；抽象包括两个方面：一个是数据抽象，一个是过程抽象，数据抽象出来的就是类的属性，过程抽象出来的就是类的方法。</li>
+<li>继承：将有着共同特征的一类事物，再进行抽象，抽象出来的类就是父类，这一类事物就叫做这个父类的子类，每个子类都有父类的特征，同时还具有自己的独有的特性。</li>
+<li>封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行封装隐藏。封装分为属性的封装和方法的封装。</li>
+<li>多态：允许不同的类对同一消息进行响应，即同一消息可以根据发送对象的不同而采取多种行为方式。方法的重载，类的覆盖正体现了多态。</li>
+</ul>
+<h2 id="重载和重写的区别"><a href="#重载和重写的区别" class="headerlink" title="重载和重写的区别"></a>重载和重写的区别</h2><ul>
+<li>重载：发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。</li>
+<li>重写：发生在父子类中，方法名、参数列表必须相同，返回值小于等于父类，抛出的异常小于等于父类，访问修饰符大于等于父类；如果父类方法访问修饰符为private则子类中就不是重写。</li>
+</ul>
+<h2 id="构造器Constructor是否可以被override"><a href="#构造器Constructor是否可以被override" class="headerlink" title="构造器Constructor是否可以被override"></a>构造器Constructor是否可以被override</h2><p>构造器不能被重写，不用有static，只能是public，protected，private这三种，而且不能有返回值。</p>
+<h2 id="String、StringBuffer、StringBuilder的区别"><a href="#String、StringBuffer、StringBuilder的区别" class="headerlink" title="String、StringBuffer、StringBuilder的区别"></a>String、StringBuffer、StringBuilder的区别</h2><ul>
+<li>可变性<br>String使用final的字符数组来保存字符串，是不可变的；<br>StringBuffer和StringBuilder也是使用字符数组来保存字符串，不过都是可变的。</li>
+<li>线程安全性<br>String可以理解为常量，所以是线程安全的；<br>StringBuffer和StringBuilder的方法一样，但是StringBuffer的方法都加了锁，所以是线程安全的，StringBuilder是非线程安全的。</li>
+<li>性能<br>String最低，每次修改都会产生一个新对象；<br>StringBuilder由于没有同步，性能比StringBuffer要高。</li>
+</ul>
+<h2 id="什么是泛型，为什么要使用以及泛型擦除"><a href="#什么是泛型，为什么要使用以及泛型擦除" class="headerlink" title="什么是泛型，为什么要使用以及泛型擦除"></a>什么是泛型，为什么要使用以及泛型擦除</h2><p>泛型即参数化类型。<br>泛型是一颗语法糖，通过制定参数化类型可以节省开发者的类型判断工作，简化开发。但是虚拟机中不存在泛型，在编译后泛型就被擦除了，用强制类型转换替代。</p>
+<h2 id="Java中的集合类及关系图"><a href="#Java中的集合类及关系图" class="headerlink" title="Java中的集合类及关系图"></a>Java中的集合类及关系图</h2><p>List和Set继承自Collection接口。<br>Set无序不允许元素重复。HashSet和TreeSet是两个主要的实现类。<br>List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。<br>Map也属于集合系统，但和Collection接口没关系。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是三个主要的实现类。<br>SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</p>
+<h2 id="HashMap和HashTable区别"><a href="#HashMap和HashTable区别" class="headerlink" title="HashMap和HashTable区别"></a>HashMap和HashTable区别</h2><ul>
+<li>HashTable的方法前面都有synchronized来同步，是线程安全的；HashMap未经同步，是非线程安全的。</li>
+<li>HashTable不允许null值(key和value都不可以) ；HashMap允许null值(key和value都可以)。</li>
+<li>HashTable使用Enumeration进行遍历；HashMap使用Iterator进行遍历。</li>
+<li>HashTable中hash数组默认大小是11，增加的方式是old*2+1；HashMap中hash数组的默认大小是16，而且一定是2的指数。</li>
+</ul>
+<h2 id="ArrayList和vector区别"><a href="#ArrayList和vector区别" class="headerlink" title="ArrayList和vector区别"></a>ArrayList和vector区别</h2><ul>
+<li>ArrayList和Vector都实现了List接口，都是通过数组实现的。</li>
+<li>Vector是线程安全的，而ArrayList是非线程安全的。</li>
+<li>List第一次创建的时候，会有一个初始大小，随着不断向List中增加元素，当List 认为容量不够的时候就会进行扩容。Vector缺省情况下自动增长原来一倍的数组长度，ArrayList增长原来的50%。</li>
+</ul>
+<h2 id="HashMap和ConcurrentHashMap"><a href="#HashMap和ConcurrentHashMap" class="headerlink" title="HashMap和ConcurrentHashMap"></a>HashMap和ConcurrentHashMap</h2><p>自行百度</p>
+<h2 id="Error、Exception的区别"><a href="#Error、Exception的区别" class="headerlink" title="Error、Exception的区别"></a>Error、Exception的区别</h2><p>都是继承自Throwable类，Error一般是虚拟机的错误，如内存溢出，虚拟机异常，系统崩溃等；<br>Exception分为一般的Exception和RuntimeException，前者为受检异常，需要捕获进行处理，后者为运行时异常，在定义方法时不需要声明会抛出该异常。</p>
+<h2 id="Java中如何实现代理机制-JDK、CGLIB"><a href="#Java中如何实现代理机制-JDK、CGLIB" class="headerlink" title="Java中如何实现代理机制(JDK、CGLIB)"></a>Java中如何实现代理机制(JDK、CGLIB)</h2><ul>
+<li>JDK动态代理：代理类和目标类实现了共同的接口，用到InvocationHandler接口。</li>
+<li>CGLIB动态代理：代理类是目标类的子类，用到MethodInterceptor接口。</li>
+</ul>
+<h2 id="多线程的实现方式"><a href="#多线程的实现方式" class="headerlink" title="多线程的实现方式"></a>多线程的实现方式</h2><p>实现Runnable、Callable，继承Thread，使用线程池</p>
+<h2 id="14-线程的状态转换"><a href="#14-线程的状态转换" class="headerlink" title="14.线程的状态转换"></a>14.线程的状态转换</h2><p><img src="http://upload-images.jianshu.io/upload_images/2616609-fbd1a3867266edba.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<h2 id="如何保证线程安全"><a href="#如何保证线程安全" class="headerlink" title="如何保证线程安全"></a>如何保证线程安全</h2><ul>
+<li>对非安全的代码进行加锁控制；</li>
+<li>使用线程安全的类；</li>
+<li>多线程并发情况下，线程共享的变量改为方法级的局部变量。</li>
+</ul>
+<h2 id="什么是线程安全"><a href="#什么是线程安全" class="headerlink" title="什么是线程安全"></a>什么是线程安全</h2><p>线程安全就是多线程访问同一代码，不会产生不确定的结果。</p>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p>…</p>
+<h2 id="synchronized和Lock的区别"><a href="#synchronized和Lock的区别" class="headerlink" title="synchronized和Lock的区别"></a>synchronized和Lock的区别</h2><ul>
+<li>synchronized锁不能被中断，Lock可以非阻塞的获取锁以及超时获取锁；</li>
+<li>synchronized是在JVM层面上实现的，不但可以通过一些监控工具监控synchronized的锁定，而且在代码执行时出现异常，JVM会自动释放锁定，但是使用Lock则不行，lock是通过代码实现的，要保证锁定一定会被释放，就必须将unLock()放到finally{}中；</li>
+<li><p>synchronized：<br>在资源竞争不是很激烈的情况下，偶尔会有同步的情形下，synchronized是很合适的。原因在于，编译程序通常会尽可能的进行优化synchronize，另外可读性非常好，不管用没用过5.0多线程包的程序员都能理解。</p>
+</li>
+<li><p>ReentrantLock:<br>ReentrantLock提供了多样化的同步，比如有时间限制的同步，可以被Interrupt的同步（synchronized的同步是不能Interrupt的）等。在资源竞争不激烈的情形下，性能稍微比synchronized差点点。但是当同步非常激烈的时候，synchronized的性能一下子能下降好几十倍。而ReentrantLock确还能维持常态。</p>
+</li>
+<li><p>Atomic:<br>和上面的类似，不激烈情况下，性能比synchronized略逊，而激烈的时候，也能维持常态。激烈的时候，Atomic的性能会优于ReentrantLock一倍左右。但是其有一个缺点，就是只能同步一个值，一段代码中只能出现一个Atomic的变量，多于一个同步无效。因为他不能在多个Atomic之间同步。</p>
+</li>
+</ul>
+<h2 id="sleep和wait的区别-考察的方向是是否会释放锁"><a href="#sleep和wait的区别-考察的方向是是否会释放锁" class="headerlink" title="sleep和wait的区别(考察的方向是是否会释放锁)"></a>sleep和wait的区别(考察的方向是是否会释放锁)</h2><ul>
+<li>sleep()方法是Thread类中方法，而wait()方法是Object类中的方法。</li>
+<li>sleep()方法导致了程序暂停执行指定的时间，让出cpu该其他线程，但是他的监控状态依然保持者，当指定的时间到了又会自动恢复运行状态，在调用sleep()方法的过程中，线程不会释放对象锁。而当调用wait()方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象调用notify()方法后本线程才进入对象锁定池准备。</li>
+</ul>
+<h2 id="多线程与死锁"><a href="#多线程与死锁" class="headerlink" title="多线程与死锁"></a>多线程与死锁</h2><p>死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。<br>产生死锁的原因：</p>
+<ul>
+<li>因为系统资源不足。</li>
+<li>进程运行推进的顺序不合适。</li>
+<li>资源分配不当。</li>
+</ul>
+<h2 id="产生死锁的四个必要条件"><a href="#产生死锁的四个必要条件" class="headerlink" title="产生死锁的四个必要条件"></a>产生死锁的四个必要条件</h2><ul>
+<li>互斥条件：所谓互斥就是进程在某一时间内独占资源。</li>
+<li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件:进程已获得资源，在末使用完之前，不能强行剥夺。</li>
+<li>循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
+<h2 id="死锁的预防"><a href="#死锁的预防" class="headerlink" title="死锁的预防"></a>死锁的预防</h2><p>打破四个条件中的一个或多个。</p>
+<h2 id="什么叫守护线程，用什么方法实现守护线程"><a href="#什么叫守护线程，用什么方法实现守护线程" class="headerlink" title="什么叫守护线程，用什么方法实现守护线程"></a>什么叫守护线程，用什么方法实现守护线程</h2><p>守护线程是为其他线程的运行提供服务的线程。<br>setDaemon(boolean on)方法可以方便的设置线程的Daemon模式，true为守护模式，false为用户模式。</p>
+<h2 id="Java线程池技术及原理"><a href="#Java线程池技术及原理" class="headerlink" title="Java线程池技术及原理"></a>Java线程池技术及原理</h2><p><a href="http://www.importnew.com/19011.html" target="_blank" rel="noopener">http://www.importnew.com/19011.html</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3932921.html" target="_blank" rel="noopener">http://www.cnblogs.com/dolphin0520/p/3932921.html</a></p>
+<h2 id="java并发包concurrent及常用的类"><a href="#java并发包concurrent及常用的类" class="headerlink" title="java并发包concurrent及常用的类"></a>java并发包concurrent及常用的类</h2><p><a href="http://www.raychase.net/1912" target="_blank" rel="noopener">并发包诸类概览</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3932921.html" target="_blank" rel="noopener">线程池</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3923167.html" target="_blank" rel="noopener">锁</a><br><a href="http://www.cnblogs.com/huangfox/archive/2012/08/16/2642666.html" target="_blank" rel="noopener">集合</a></p>
+<h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><p>用volatile修饰的变量，线程在每次使用变量的时候，都会读取变量修改后的最的值。volatile很容易被误用，用来进行原子性操作。<br>Java语言中的volatile变量可以被看作是一种“程度较轻的synchronized”；与synchronized 块相比，volatile 变量所需的编码较少，并且运行时开销也较少，但是它所能实现的功能也仅是synchronized的一部分。锁提供了两种主要特性：互斥（mutual exclusion）和可见性（visibility）。互斥即一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据。可见性必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个线程是可见的，如果没有同步机制提供的这种可见性保证，线程看到的共享变量可能是修改前的值或不一致的值，这将引发许多严重问题。Volatile变量具有synchronized的可见性特性，但是不具备原子特性。这就是说线程能够自动发现volatile<br>变量的最新值。<br>要使volatile变量提供理想的线程安全，必须同时满足下面两个条件：对变量的写操作不依赖于当前值；该变量没有包含在具有其他变量的不变式中。<br>第一个条件的限制使volatile变量不能用作线程安全计数器。虽然增量操作（x++）看上去类似一个单独操作，实际上它是一个由读取－修改－写入操作序列组成的组合操作，必须以原子方式执行，而volatile不能提供必须的原子特性。实现正确的操作需要使x 的值在操作期间保持不变，而volatile<br>变量无法实现这点。<br>每一个线程运行时都有一个线程栈，线程栈保存了线程运行时候变量值信息。当线程访问某一个对象时候值的时候，首先通过对象的引用找到对应在堆内存的变量的值，然后把堆内存变量的具体值load到线程本地内存中，建立一个变量副本，之后线程就不再和对象在堆内存变量值有任何关系，而是直接修改副本变量的值，在修改完之后的某一个时刻（线程退出之前），自动把线程变量副本的值回写到对象在堆中变量。这样在堆中的对象的值就产生变化了。<br><a href="http://blog.csdn.net/t894690230/article/details/50588129" target="_blank" rel="noopener">volatile关键字作用与内存可见性、指令重排序概述[JAVA]</a></p>
+<h2 id="偏向锁、轻量级锁"><a href="#偏向锁、轻量级锁" class="headerlink" title="偏向锁、轻量级锁"></a>偏向锁、轻量级锁</h2><p><a href="http://www.importnew.com/17450.html" target="_blank" rel="noopener">http://www.importnew.com/17450.html</a></p>
+<h2 id="Java中的NIO，BIO，AIO分别是什么"><a href="#Java中的NIO，BIO，AIO分别是什么" class="headerlink" title="Java中的NIO，BIO，AIO分别是什么"></a>Java中的NIO，BIO，AIO分别是什么</h2><ul>
+<li>BIO:同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</li>
+<li>NIO:同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。NIO方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</li>
+<li>AIO:异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理.AIO方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
+</ul>
+<h2 id="IO和NIO区别"><a href="#IO和NIO区别" class="headerlink" title="IO和NIO区别"></a>IO和NIO区别</h2><ul>
+<li>IO是面向流的，NIO是面向缓冲区的。</li>
+<li>IO的各种流是阻塞的，NIO是非阻塞模式。</li>
+<li>Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。</li>
+</ul>
+<h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><p>把对象转换为字节序列的过程称为对象的序列化。<br>把字节序列恢复为对象的过程称为对象的反序列化。<br>对象的序列化主要有两种用途：<br>一.把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中；<br>二.在网络上传送对象的字节序列。<br>当两个进程在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。</p>
+<h2 id="内存溢出和内存泄漏的区别"><a href="#内存溢出和内存泄漏的区别" class="headerlink" title="内存溢出和内存泄漏的区别"></a>内存溢出和内存泄漏的区别</h2><ul>
+<li>内存溢出是指程序在申请内存时，没有足够的内存空间供其使用，出现out of<br>memory。</li>
+<li>内存泄漏是指分配出去的内存不再使用，但是无法回收。</li>
+</ul>
+<h2 id="Java内存模型及各个区域的OOM，如何重现OOM"><a href="#Java内存模型及各个区域的OOM，如何重现OOM" class="headerlink" title="Java内存模型及各个区域的OOM，如何重现OOM"></a>Java内存模型及各个区域的OOM，如何重现OOM</h2><p>&lt;&lt;深入理解jvm&gt;&gt;</p>
+<h2 id="Java内存管理及回收算法"><a href="#Java内存管理及回收算法" class="headerlink" title="Java内存管理及回收算法"></a>Java内存管理及回收算法</h2><p><a href="http://www.cnblogs.com/hnrainll/archive/2013/11/06/3410042.html" target="_blank" rel="noopener">http://www.cnblogs.com/hnrainll/archive/2013/11/06/3410042.html</a></p>
+<h2 id="Java类加载器及如何加载类-双亲委派"><a href="#Java类加载器及如何加载类-双亲委派" class="headerlink" title="Java类加载器及如何加载类(双亲委派)"></a>Java类加载器及如何加载类(双亲委派)</h2><p><a href="http://blog.csdn.net/zhoudaxia/article/details/35824249" target="_blank" rel="noopener">http://blog.csdn.net/zhoudaxia/article/details/35824249</a></p>
+<h2 id="Statement和PreparedStatement之间的区别"><a href="#Statement和PreparedStatement之间的区别" class="headerlink" title="Statement和PreparedStatement之间的区别"></a>Statement和PreparedStatement之间的区别</h2><ul>
+<li>PreparedStatement是预编译的,对于批量处理可以大大提高效率. 也叫JDBC存储过程。</li>
+<li>使用Statement 对象。在对数据库只执行一次性存取的时侯，用Statement 对象进行处理。PreparedStatement对象的开销比Statement大，对于一次性操作并不会带来额外的好处。</li>
+<li>statement每次执行sql语句，相关数据库都要执行sql语句的编译preparedstatement是预编译得,preparedstatement支持批处理。</li>
+<li>PreparedStatement对象不仅包含了SQL语句，而且大多数情况下这个语句已经被预编译过，因而当其执行时，只需DBMS运行SQL语句，而不必先编译。当你需要执行Statement对象多次的时候，PreparedStatement对象将会大大降低运行时间，当然也加快了访问数据库的速度。<br>这种转换也给你带来很大的便利，不必重复SQL语句的句法，而只需更改其中变量的值，便可重新执行SQL语句。选择PreparedStatement对象与否，在于相同句法的SQL语句是否执行了多次，而且两次之间的差别仅仅是变量的不同。如果仅仅执行了一次的话，它应该和普通的对象毫无差异，体现不出它预编译的优越性。</li>
+<li>PreparedStatemeng可以防SQL注入。  </li>
+</ul>
+<h2 id="servlet生命周期及各个方法"><a href="#servlet生命周期及各个方法" class="headerlink" title="servlet生命周期及各个方法"></a>servlet生命周期及各个方法</h2><p><a href="http://www.cnblogs.com/xuekyo/archive/2013/02/24/2924072.html" target="_blank" rel="noopener">http://www.cnblogs.com/xuekyo/archive/2013/02/24/2924072.html</a></p>
+<h2 id="JSP原理"><a href="#JSP原理" class="headerlink" title="JSP原理"></a>JSP原理</h2><p><a href="http://blog.csdn.net/hanxuemin12345/article/details/23831645" target="_blank" rel="noopener">http://blog.csdn.net/hanxuemin12345/article/details/23831645</a></p>
+<h2 id="JSP和Servlet的区别"><a href="#JSP和Servlet的区别" class="headerlink" title="JSP和Servlet的区别"></a>JSP和Servlet的区别</h2><ul>
+<li>JSP经编译后就变成了“类servlet”。</li>
+<li>JSP由HTML代码和JSP标签构成，更擅长页面显示；Servlet更擅长流程控制。</li>
+<li>JSP中嵌入JAVA代码，而Servlet中嵌入HTML代码。</li>
+</ul>
+<h2 id="MVC概念"><a href="#MVC概念" class="headerlink" title="MVC概念"></a>MVC概念</h2><p><a href="http://www.cnblogs.com/scwyh/articles/1436802.html" target="_blank" rel="noopener">http://www.cnblogs.com/scwyh/articles/1436802.html</a></p>
+<h2 id="Hibernate和MyBatis的比较"><a href="#Hibernate和MyBatis的比较" class="headerlink" title="Hibernate和MyBatis的比较"></a>Hibernate和MyBatis的比较</h2><p><a href="http://blog.csdn.net/firejuly/article/details/8190229" target="_blank" rel="noopener">http://blog.csdn.net/firejuly/article/details/8190229</a></p>
+<h2 id="Hibernate一级和二级缓存"><a href="#Hibernate一级和二级缓存" class="headerlink" title="Hibernate一级和二级缓存"></a>Hibernate一级和二级缓存</h2><p><a href="http://blog.csdn.net/windrui/article/details/23165845" target="_blank" rel="noopener">http://blog.csdn.net/windrui/article/details/23165845</a></p>
+<h2 id="Springbean的加载过程-推荐看Spring的源码"><a href="#Springbean的加载过程-推荐看Spring的源码" class="headerlink" title="Springbean的加载过程(推荐看Spring的源码)"></a>Springbean的加载过程(推荐看Spring的源码)</h2><p><a href="http://geeekr.com/read-spring-source-1-how-to-load-bean/" target="_blank" rel="noopener">http://geeekr.com/read-spring-source-1-how-to-load-bean/</a><br>在配置文件中配置ContextLoaderListener，当server容器启动时，发出事件通知，Listener接收到事件通知，进行InitWebApplicationContext初始化wac，首先会createwac，然后根据contextConfigLocation配置去寻找配置文件，如果没有配置就默认使用WEB-INF下的ApplicationContext.xml，设置了bean的配置文件就开始最核心的方法——wac.refresh()，在这个方法里，会完成资源文件的加载、配置文件解析、Bean定义的注册、组件的初始化等核心工作，最后将bean存进一个map中。</p>
+<h2 id="Springbean的实例化-推荐看Spring的源码"><a href="#Springbean的实例化-推荐看Spring的源码" class="headerlink" title="Springbean的实例化(推荐看Spring的源码)"></a>Springbean的实例化(推荐看Spring的源码)</h2><p><a href="http://geeekr.com/read-spring-source-two-beans-initialization/" target="_blank" rel="noopener">http://geeekr.com/read-spring-source-two-beans-initialization/</a></p>
+<h2 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h2><p><a href="http://www.cnblogs.com/zrtqsk/p/3735273.html" target="_blank" rel="noopener">http://www.cnblogs.com/zrtqsk/p/3735273.html</a></p>
+<h2 id="Spring如何实现AOP和IOC-推荐看Spring的源码"><a href="#Spring如何实现AOP和IOC-推荐看Spring的源码" class="headerlink" title="Spring如何实现AOP和IOC(推荐看Spring的源码)"></a>Spring如何实现AOP和IOC(推荐看Spring的源码)</h2><p><a href="http://www.360doc.com/content/15/0116/21/12385684_441408260.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/15/0116/21/12385684_441408260.shtml</a></p>
+<h2 id="Spring-Bean注入方式"><a href="#Spring-Bean注入方式" class="headerlink" title="Spring Bean注入方式"></a>Spring Bean注入方式</h2><p>setter注入和构造器注入。<br>相比之下，setter注入更符合程序员的编程习惯，更加直观自然；并且如果依赖过多，使用构造器注入会显得构造器比较臃肿，同时，想要实例化bean，需要对它的所有依赖都先实例化，导致性能下降，使用setter注入可以解决这些问题。<br>构造器注入可以在构造器中决定依赖的注入顺序，并且使用构造器注入，可以没有setter方法，这样封装性更好，代码不易被破坏；依赖关系只能在构造器中设定，只有组件的创建者才能改变依赖关系，更符合高内聚原则。</p>
+<h2 id="Spring的事务管理"><a href="#Spring的事务管理" class="headerlink" title="Spring的事务管理"></a>Spring的事务管理</h2><p><a href="http://www.mamicode.com/info-detail-1248286.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-1248286.html</a></p>
+<h2 id="Spring-MVC原理"><a href="#Spring-MVC原理" class="headerlink" title="Spring MVC原理"></a>Spring MVC原理</h2><p><a href="http://blog.sina.com.cn/s/blog_7ef0a3fb0101po57.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_7ef0a3fb0101po57.html</a></p>
+<h2 id="springmvc用过哪些注解"><a href="#springmvc用过哪些注解" class="headerlink" title="springmvc用过哪些注解"></a>springmvc用过哪些注解</h2><p><a href="http://aijuans.iteye.com/blog/2160141" target="_blank" rel="noopener">http://aijuans.iteye.com/blog/2160141</a></p>
+<h2 id="Restful好处"><a href="#Restful好处" class="headerlink" title="Restful好处"></a>Restful好处</h2><ul>
+<li>客户-服务器：客户-服务器约束背后的原则是分离关注点。通过分离用户接口和数据存储这两个关注点，改善了用户接口跨多个平台的可移植性；同时通过简化服务器组件，改善了系统的可伸缩性。</li>
+<li>无状态：通信在本质上是无状态的，改善了可见性、可靠性、可伸缩性.</li>
+<li>缓存：改善了网络效率减少一系列交互的平均延迟时间，来提高效率、可伸缩性和用户可觉察的性能。</li>
+<li>统一接口：REST架构风格区别于其他基于网络的架构风格的核心特征是，它强调组件之间要有一个统一的接口。</li>
+</ul>
+<h2 id="memcached和redis的区别"><a href="#memcached和redis的区别" class="headerlink" title="memcached和redis的区别"></a>memcached和redis的区别</h2><ul>
+<li>性能对比：由于Redis只使用单核，而Memcached可以使用多核，所以平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。</li>
+<li>内存使用效率对比：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。</li>
+<li>Redis支持服务器端的数据操作：Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。</li>
+</ul>
+<h2 id="json和xml区别"><a href="#json和xml区别" class="headerlink" title="json和xml区别"></a>json和xml区别</h2><ul>
+<li>XML:<br>应用广泛，可扩展性强，被广泛应用各种场合；<br>读取、解析没有JSON快；<br>可读性强，可描述复杂结构。</li>
+<li>JSON:<br>结构简单，都是键值对；<br>读取、解析速度快，很多语言支持；<br>传输数据量小，传输速率大大提高；<br>描述复杂结构能力较弱。</li>
+</ul>
+<h2 id="面向对象的设计原则"><a href="#面向对象的设计原则" class="headerlink" title="面向对象的设计原则"></a>面向对象的设计原则</h2><ul>
+<li>开闭原则</li>
+<li>单一职责原则</li>
+<li>接口隔离原则</li>
+<li>迪米特原则</li>
+<li>依赖倒置原则</li>
+<li>里氏替换原则</li>
+<li>合成复用原则</li>
+</ul>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h2 id="操作系统死锁"><a href="#操作系统死锁" class="headerlink" title="操作系统死锁"></a>操作系统死锁</h2><p><a href="http://blog.sina.com.cn/s/blog_5e3604840100ddgq.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_5e3604840100ddgq.html</a></p>
+<h2 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h2><ul>
+<li>第一范式：表的属性不可再分；</li>
+<li>第二范式：在第一范式的基础上，消除了非主属性对于主码的部分函数依赖。（部分函数依赖：(a,c)–&gt;b，a–&gt;b）</li>
+<li>第三范式：在第二范式的基础上，消除了非主属性对于主码的传递函数依赖。</li>
+<li>BCNF：在第三范式的基础上，消除了主属性对于主码的部分函数依赖和传递函数依赖。</li>
+</ul>
+<h2 id="数据库事务隔离级别"><a href="#数据库事务隔离级别" class="headerlink" title="数据库事务隔离级别"></a>数据库事务隔离级别</h2><p><a href="http://blog.csdn.net/fg2006/article/details/6937413" target="_blank" rel="noopener">http://blog.csdn.net/fg2006/article/details/6937413</a></p>
+<h2 id="数据库连接池的原理"><a href="#数据库连接池的原理" class="headerlink" title="数据库连接池的原理"></a>数据库连接池的原理</h2><p><a href="http://blog.csdn.net/shuaihj/article/details/14223015" target="_blank" rel="noopener">http://blog.csdn.net/shuaihj/article/details/14223015</a></p>
+<h2 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h2><p><a href="http://www.open-open.com/lib/view/open1452046967245.html" target="_blank" rel="noopener">http://www.open-open.com/lib/view/open1452046967245.html</a></p>
+<h2 id="如何实现不同数据库的数据查询分页"><a href="#如何实现不同数据库的数据查询分页" class="headerlink" title="如何实现不同数据库的数据查询分页"></a>如何实现不同数据库的数据查询分页</h2><p><a href="http://blog.csdn.net/yztezhl/article/details/20489387" target="_blank" rel="noopener">http://blog.csdn.net/yztezhl/article/details/20489387</a></p>
+<h2 id="SQL注入的原理，如何预防"><a href="#SQL注入的原理，如何预防" class="headerlink" title="SQL注入的原理，如何预防"></a>SQL注入的原理，如何预防</h2><p><a href="https://www.aliyun.com/zixun/content/3_15_245099.html" target="_blank" rel="noopener">https://www.aliyun.com/zixun/content/3_15_245099.html</a></p>
+<h2 id="数据库索引的实现-B-树介绍、和B树、R树区别"><a href="#数据库索引的实现-B-树介绍、和B树、R树区别" class="headerlink" title="数据库索引的实现(B+树介绍、和B树、R树区别)"></a>数据库索引的实现(B+树介绍、和B树、R树区别)</h2><p><a href="http://blog.csdn.net/kennyrose/article/details/7532032" target="_blank" rel="noopener">http://blog.csdn.net/kennyrose/article/details/7532032</a><br><a href="http://www.xuebuyuan.com/2216918.html" target="_blank" rel="noopener">http://www.xuebuyuan.com/2216918.html</a></p>
+<h2 id="SQL性能优化"><a href="#SQL性能优化" class="headerlink" title="SQL性能优化"></a>SQL性能优化</h2><p><a href="http://database.51cto.com/art/200904/118526.htm" target="_blank" rel="noopener">http://database.51cto.com/art/200904/118526.htm</a><br><a href="http://www.cnblogs.com/rootq/archive/2008/11/17/1334727.html" target="_blank" rel="noopener">http://www.cnblogs.com/rootq/archive/2008/11/17/1334727.html</a></p>
+<h2 id="数据库索引的优缺点以及什么时候数据库索引失效"><a href="#数据库索引的优缺点以及什么时候数据库索引失效" class="headerlink" title="数据库索引的优缺点以及什么时候数据库索引失效"></a>数据库索引的优缺点以及什么时候数据库索引失效</h2><p><a href="http://www.cnblogs.com/mxmbk/articles/5226344.html" target="_blank" rel="noopener">http://www.cnblogs.com/mxmbk/articles/5226344.html</a><br><a href="http://www.cnblogs.com/simplefrog/archive/2012/07/15/2592527.html" target="_blank" rel="noopener">http://www.cnblogs.com/simplefrog/archive/2012/07/15/2592527.html</a><br><a href="http://www.open-open.com/lib/view/open1418476492792.html" target="_blank" rel="noopener">http://www.open-open.com/lib/view/open1418476492792.html</a><br><a href="http://blog.csdn.net/colin_liu2009/article/details/7301089" target="_blank" rel="noopener">http://blog.csdn.net/colin_liu2009/article/details/7301089</a><br><a href="http://www.cnblogs.com/hongfei/archive/2012/10/20/2732589.html" target="_blank" rel="noopener">http://www.cnblogs.com/hongfei/archive/2012/10/20/2732589.html</a></p>
+<h2 id="Redis的数据类型"><a href="#Redis的数据类型" class="headerlink" title="Redis的数据类型"></a>Redis的数据类型</h2><p>参考<a href="http://blog.csdn.net/hechurui/article/details/49508735" target="_blank" rel="noopener">http://blog.csdn.net/hechurui/article/details/49508735</a></p>
+<h2 id="OSI七层模型以及TCP-IP四层模型"><a href="#OSI七层模型以及TCP-IP四层模型" class="headerlink" title="OSI七层模型以及TCP/IP四层模型"></a>OSI七层模型以及TCP/IP四层模型</h2><p>参考文章：<br><a href="http://blog.csdn.net/sprintfwater/article/details/8751453" target="_blank" rel="noopener">http://blog.csdn.net/sprintfwater/article/details/8751453</a><br><a href="http://www.cnblogs.com/commanderzhu/p/4821555.html" target="_blank" rel="noopener">http://www.cnblogs.com/commanderzhu/p/4821555.html</a><br><a href="http://blog.csdn.net/superjunjin/article/details/7841099" target="_blank" rel="noopener">http://blog.csdn.net/superjunjin/article/details/7841099</a></p>
+<h2 id="HTTP和HTTPS区别"><a href="#HTTP和HTTPS区别" class="headerlink" title="HTTP和HTTPS区别"></a>HTTP和HTTPS区别</h2><p>参考：<br><a href="http://blog.csdn.net/mingli198611/article/details/8055261" target="_blank" rel="noopener">http://blog.csdn.net/mingli198611/article/details/8055261</a><br><a href="http://www.mahaixiang.cn/internet/1233.html" target="_blank" rel="noopener">http://www.mahaixiang.cn/internet/1233.html</a></p>
+<h2 id="HTTP报文内容"><a href="#HTTP报文内容" class="headerlink" title="HTTP报文内容"></a>HTTP报文内容</h2><p>参考文章：<br><a href="https://yq.aliyun.com/articles/44675" target="_blank" rel="noopener">https://yq.aliyun.com/articles/44675</a><br><a href="http://www.cnblogs.com/klguang/p/4618526.html" target="_blank" rel="noopener">http://www.cnblogs.com/klguang/p/4618526.html</a><br><a href="http://my.oschina.net/orgsky/blog/387759" target="_blank" rel="noopener">http://my.oschina.net/orgsky/blog/387759</a></p>
+<h2 id="get提交和post提交的区别"><a href="#get提交和post提交的区别" class="headerlink" title="get提交和post提交的区别"></a>get提交和post提交的区别</h2><p>参考文章：<br><a href="http://www.cnblogs.com/hyddd/archive/2009/03/31/1426026.html" target="_blank" rel="noopener">http://www.cnblogs.com/hyddd/archive/2009/03/31/1426026.html</a><br><a href="http://www.jellythink.com/archives/806" target="_blank" rel="noopener">http://www.jellythink.com/archives/806</a></p>
+<h2 id="get提交是否有字节限制，如果有是在哪限制的"><a href="#get提交是否有字节限制，如果有是在哪限制的" class="headerlink" title="get提交是否有字节限制，如果有是在哪限制的"></a>get提交是否有字节限制，如果有是在哪限制的</h2><p>参考<a href="http://www.jellythink.com/archives/806" target="_blank" rel="noopener">http://www.jellythink.com/archives/806</a></p>
+<h2 id="TCP的三次握手和四次挥手"><a href="#TCP的三次握手和四次挥手" class="headerlink" title="TCP的三次握手和四次挥手"></a>TCP的三次握手和四次挥手</h2><p>阅读<a href="http://www.jianshu.com/p/f7d1010fa603" target="_blank" rel="noopener">http://www.jianshu.com/p/f7d1010fa603</a></p>
+<h2 id="session和cookie的区别"><a href="#session和cookie的区别" class="headerlink" title="session和cookie的区别"></a>session和cookie的区别</h2><p>参考<a href="http://www.cnblogs.com/shiyangxt/archive/2008/10/07/1305506.html" target="_blank" rel="noopener">http://www.cnblogs.com/shiyangxt/archive/2008/10/07/1305506.html</a></p>
+<h2 id="HTTP请求中Session实现原理"><a href="#HTTP请求中Session实现原理" class="headerlink" title="HTTP请求中Session实现原理"></a>HTTP请求中Session实现原理</h2><p>参考<a href="http://blog.csdn.net/zhq426/article/details/2992488" target="_blank" rel="noopener">http://blog.csdn.net/zhq426/article/details/2992488</a></p>
+<h2 id="redirect与forward区别"><a href="#redirect与forward区别" class="headerlink" title="redirect与forward区别"></a>redirect与forward区别</h2><p>参考<a href="http://www.cnblogs.com/wxgblogs/p/5602849.html" target="_blank" rel="noopener">http://www.cnblogs.com/wxgblogs/p/5602849.html</a></p>
+<h2 id="TCP和UDP区别"><a href="#TCP和UDP区别" class="headerlink" title="TCP和UDP区别"></a>TCP和UDP区别</h2><p>参考<a href="http://www.cnblogs.com/bizhu/archive/2012/05/12/2497493.html" target="_blank" rel="noopener">http://www.cnblogs.com/bizhu/archive/2012/05/12/2497493.html</a></p>
+<h2 id="DDos攻击及预防"><a href="#DDos攻击及预防" class="headerlink" title="DDos攻击及预防"></a>DDos攻击及预防</h2><p>参考文章：<br><a href="http://blog.csdn.net/huwei2003/article/details/45476743" target="_blank" rel="noopener">http://blog.csdn.net/huwei2003/article/details/45476743</a><br><a href="http://www.leiphone.com/news/201509/9zGlIDvLhwguqOtg.html" target="_blank" rel="noopener">http://www.leiphone.com/news/201509/9zGlIDvLhwguqOtg.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java、面试题/" rel="tag"># java、面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20171214/Opencv3_in_java_1/" rel="prev" title="Opencv3 in java 学习笔记(一)：读图片与写图片">
+                Opencv3 in java 学习笔记(一)：读图片与写图片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/avatar.jpg"
+                alt="liruozhang" />
+            
+              <p class="site-author-name" itemprop="name">liruozhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hustlrz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liruozhang</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 你是第<b>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      </b>个到访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

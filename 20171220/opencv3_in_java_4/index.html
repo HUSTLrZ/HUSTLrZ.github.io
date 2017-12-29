@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="opencv、java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于opencv使用java API的二值化操作。">
+<meta name="keywords" content="opencv、java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Opencv3 in java 学习笔记(四)：基本的阈值操作">
+<meta property="og:url" content="http://liruozhang.com/20171220/opencv3_in_java_4/index.html">
+<meta property="og:site_name" content="HUSTLrZ&#39;s blog">
+<meta property="og:description" content="关于opencv使用java API的二值化操作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Example.jpg">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/thresh_binary.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Binary.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/thresh_binary_inv.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Binary_Inverted.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/thresh_trunc.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Truncate.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/thresh_tozero.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Zero.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/thresh_tozero_inv.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Zero_Inverted.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/test.png">
+<meta property="og:image" content="http://liruozhang.com/img/opencv/threshold.jpg">
+<meta property="og:updated_time" content="2017-12-21T05:37:57.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Opencv3 in java 学习笔记(四)：基本的阈值操作">
+<meta name="twitter:description" content="关于opencv使用java API的二值化操作。">
+<meta name="twitter:image" content="http://liruozhang.com/img/opencv/Threshold_Tutorial_Theory_Example.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liruozhang.com/20171220/opencv3_in_java_4/"/>
+
+
+
+
+
+  <title>Opencv3 in java 学习笔记(四)：基本的阈值操作 | HUSTLrZ's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HUSTLrZ's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">help yourself.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://liruozhang.com/20171220/opencv3_in_java_4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liruozhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUSTLrZ's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Opencv3 in java 学习笔记(四)：基本的阈值操作</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T10:53:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T13:37:57+08:00">
+                2017-12-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/opencv/" itemprop="url" rel="index">
+                    <span itemprop="name">opencv</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于opencv使用java API的二值化操作。</p>
+<a id="more"></a>
+<hr>
+<h2 id="什么是阈值？"><a href="#什么是阈值？" class="headerlink" title="什么是阈值？"></a>什么是阈值？</h2><ul>
+<li><p>最简单的图像分割的方法。</p>
+</li>
+<li><p>应用举例：从一副图像中利用阈值分割出我们需要的物体部分（当然这里的物体可以是一部分或者整体）。这样的图像分割方法是基于图像中物体与背景之间的灰度差异，而且此分割属于像素级的分割。</p>
+</li>
+<li><p>为了从一副图像中提取出我们需要的部分，应该用图像中的每一个像素点的灰度值与选取的阈值进行比较，并作出相应的判断。（注意：阈值的选取依赖于具体的问题。即：物体在不同的图像中有可能会有不同的灰度值。</p>
+</li>
+<li><p>一旦找到了需要分割的物体的像素点，我们可以对这些像素点设定一些特定的值来表示。（例如：可以将该物体的像素点的灰度值设定为：‘0’（黑色）,其他的像素点的灰度值为：‘255’（白色）；当然像素点的灰度值可以任意，但最好设定的两种颜色对比度较强，方便观察结果）。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Example.jpg" alt="src"></p>
+</li>
+</ul>
+<hr>
+<h2 id="二进制阈值化"><a href="#二进制阈值化" class="headerlink" title="二进制阈值化"></a>二进制阈值化</h2><ul>
+<li>该阈值化类型如下式所示:<br><img src="/img/opencv/thresh_binary.png" alt="src"></li>
+<li>解释：在运用该阈值类型的时候，先要选定一个特定的阈值量，比如：125，这样，新的阈值产生规则可以解释为大于125的像素点的灰度值设定为最大值(如8位灰度值最大为255)，灰度值小于125的像素点的灰度值设定为0。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Binary.png" alt="src"></li>
+</ul>
+<hr>
+<h2 id="反二进制阈值化"><a href="#反二进制阈值化" class="headerlink" title="反二进制阈值化"></a>反二进制阈值化</h2><ul>
+<li>该阈值类型如下式所示：<br><img src="/img/opencv/thresh_binary_inv.png" alt="src"></li>
+<li>解释：该阈值化与二进制阈值化相似，先选定一个特定的灰度值作为阈值，不过最后的设定值相反。（在8位灰度图中，例如大于阈值的设定为0，而小于该阈值的设定为255）。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Binary_Inverted.png" alt="src"></li>
+</ul>
+<hr>
+<h2 id="截断阈值化"><a href="#截断阈值化" class="headerlink" title="截断阈值化"></a>截断阈值化</h2><ul>
+<li>该阈值化类型如下式所示：<br><img src="/img/opencv/thresh_trunc.png" alt="src"></li>
+<li>解释：同样首先需要选定一个阈值，图像中大于该阈值的像素点被设定为该阈值，小于该阈值的保持不变。（例如：阈值选取为125，那小于125的阈值不改变，大于125的灰度值（230）的像素点就设定为该阈值）。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Truncate.png" alt="src"></li>
+</ul>
+<hr>
+<h2 id="阈值化为0"><a href="#阈值化为0" class="headerlink" title="阈值化为0"></a>阈值化为0</h2><ul>
+<li>该阈值类型如下式所示：<br><img src="/img/opencv/thresh_tozero.png" alt="src"></li>
+<li>解释：先选定一个阈值，然后对图像做如下处理：1 像素点的灰度值大于该阈值的不进行任何改变；2 像素点的灰度值小于该阈值的，其灰度值全部变为0。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Zero.png" alt="src"></li>
+</ul>
+<hr>
+<h2 id="反阈值化为0"><a href="#反阈值化为0" class="headerlink" title="反阈值化为0"></a>反阈值化为0</h2><ul>
+<li>该阈值类型如下式所示：<br><img src="/img/opencv/thresh_tozero_inv.png" alt="src"></li>
+<li>解释：原理类似于0阈值，但是在对图像做处理的时候相反，即：像素点的灰度值小于该阈值的不进行任何改变，而大于该阈值的部分，其灰度值全部变为0。<br><img src="/img/opencv/Threshold_Tutorial_Theory_Zero_Inverted.png" alt="src"></li>
+</ul>
+<hr>
+<p>二值化操作的方法在Imgproc类中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Imgproc.threshold(blur, result, thresh, maxval, type);</span><br></pre></td></tr></table></figure></p>
+<p>thresh为设置的阈值，maxval为设定的最大灰度值（该参数运用在二进制与反二进制阈值操作中）。<br>type为阈值化操作类型，以上五种为常用的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_BINARY = <span class="number">0</span>;      <span class="comment">//二进制阈值化</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_BINARY_INV = <span class="number">1</span>;  <span class="comment">//反二进制阈值化</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_TRUNC = <span class="number">2</span>;       <span class="comment">//截断阈值化</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_TOZERO = <span class="number">3</span>;      <span class="comment">//阈值化为0</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_TOZERO_INV = <span class="number">4</span>;  <span class="comment">//反阈值化为0</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_MASK = <span class="number">7</span>;        <span class="comment">//未知</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_OTSU = <span class="number">8</span>;        <span class="comment">//使用算法选择最优阈值</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESH_TRIANGLE = <span class="number">16</span>;   <span class="comment">//未知</span></span><br></pre></td></tr></table></figure></p>
+<p>Thresh_otsu 的官方解释为 use Otsu algorithm to choose the optimal threshold value; combine the flag with one of the above CV<em>THRESH</em>* values，这样，当type为8是，代表的是OTSU+BINARY（8+0）。<br>下面以一个例子说明这个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.opencv.core.Mat;</span><br><span class="line"><span class="keyword">import</span> org.opencv.core.Size;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgcodecs.Imgcodecs;</span><br><span class="line"><span class="keyword">import</span> org.opencv.imgproc.Imgproc;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> HustLrz</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> Created in 14:08 2017/12/14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//加载opencv动态链接库</span></span><br><span class="line">        String path = <span class="string">"G:/opencv/build/java/x64/opencv_java320.dll"</span>;</span><br><span class="line">        System.load(path);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//read picture</span></span><br><span class="line">        Mat src = Imgcodecs.imread(<span class="string">"res/img/tutorial/test.png"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//灰度化</span></span><br><span class="line">        Mat gray = <span class="keyword">new</span> Mat();</span><br><span class="line">        Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用3*3内核降噪</span></span><br><span class="line">        Mat blur = <span class="keyword">new</span> Mat();</span><br><span class="line">        Imgproc.blur(gray, blur, <span class="keyword">new</span> Size(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//二值化，使用算法选取阈值，此时第三个参数没有意义</span></span><br><span class="line">        Mat result = <span class="keyword">new</span> Mat();</span><br><span class="line">        Imgproc.threshold(blur, result, <span class="number">0</span>, <span class="number">255</span>, Imgproc.THRESH_OTSU);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//write picture</span></span><br><span class="line">        Imgcodecs.imwrite(<span class="string">"res/img/tutorial/threshold.jpg"</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原图：<br><img src="/img/opencv/test.png" alt="src"><br>使用OTSU的阈值化操作：<br><img src="/img/opencv/threshold.jpg" alt="src"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/opencv、java/" rel="tag"># opencv、java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20171220/opencv3_in_java/" rel="next" title="Opencv3 in java 学习笔记：一些应该写在前面的话">
+                <i class="fa fa-chevron-left"></i> Opencv3 in java 学习笔记：一些应该写在前面的话
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20171221/opencv3_in_java_5/" rel="prev" title="Opencv3 in java 学习笔记(五)：一个边缘检测的例子">
+                Opencv3 in java 学习笔记(五)：一个边缘检测的例子 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/avatar.jpg"
+                alt="liruozhang" />
+            
+              <p class="site-author-name" itemprop="name">liruozhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hustlrz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liruozhang</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 你是第<b>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      </b>个到访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
